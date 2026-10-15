@@ -26,3 +26,13 @@ DB 설정이 없으면 체험 모드로 동작하며 글은 해당 브라우저�
 ## 배포
 
 Vercel에서 이 저장소를 Import하고 Next.js 프리셋을 사용합니다. `vercel.json`의 `regions: ["icn1"]`이 서버리스 함수를 서울로 지정합니다. `/api/health`에서 실행 리전과 DB 설정 여부를 확인할 수 있습니다. 동일 리전이어도 실제 지연시간은 부하와 연결 방식에 따라 다릅니다.
+
+## 현재 운영 상태 (2026-10-15)
+
+- 라이브: https://gardening-community-two.vercel.app/
+- 서버 런타임: icn1, Supabase: ap-northeast-2 (서울).
+- posts 6개, rankings 3개 샘플 데이터 등록 및 세 테이블 RLS 활성화 확인.
+- Vercel Marketplace의 SUPABASE_PUBLISHABLE_KEY / SUPABASE_ANON_KEY를 next.config.ts에서 공개 클라이언트 변수로 매핑합니다. 비밀 관리 키는 매핑하지 않습니다.
+- 로컬 .env.local에는 앱 실행에 필요한 URL 및 공개 publishable 키를 저장했습니다.
+- 일반 사용자 이메일 로그인 운영에는 별도 custom SMTP가 필요합니다. 현재 기본 메일 서비스는 프로젝트 팀 주소만 지원합니다. https://supabase.com/docs/guides/auth/auth-smtp
+- Git 사용자 정보는 저장소 로컬 설정이며, SSH 키는 work/ssh/id_ed25519에 있습니다. 홈 경로 쓰기 제한으로 전역 설정 및 ~/.ssh 위치는 적용하지 못했습니다. SSH push는 work/git-ssh.cmd를 GIT_SSH로 지정해 443 포트를 사용합니다.
